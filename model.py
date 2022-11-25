@@ -5,11 +5,11 @@ def parsing(my_str) -> list:
     """
     new_list = []
     temp = 0
-    for idx,elem in enumerate(my_str):
+    for idx, elem in enumerate(my_str):
         if elem in "+-/*":
             new_list.append(int(my_str[temp:idx]))  # добавили 1 temp = 0
-            new_list.append(elem) # добавили "+" в new_list
-            temp = idx + 1 # индекс "+"
+            new_list.append(elem)  # добавили "+" в new_list
+            temp = idx + 1  # индекс "+"
     new_list.append(int(my_str[temp:]))
 
     return new_list
@@ -33,31 +33,32 @@ def run(new_list) -> int:
             tmp_list.pop(idx - 1)
             length -= 2
         elif elem == '/':
-            temp = tmp_list[idx-1] / tmp_list[idx +1]
+            temp = tmp_list[idx-1] / tmp_list[idx + 1]
             tmp_list[idx] = temp
             tmp_list.pop(idx + 1)
             tmp_list.pop(idx - 1)
             length -= 2
-        else: idx += 1
+        else:
+            idx += 1
 
     length = len(tmp_list)
     idx = 0
     while idx < length:
-            elem = tmp_list[idx]
-            if elem == '+':
-                temp = tmp_list[idx - 1] + tmp_list[idx + 1]
-                tmp_list[idx] = temp
-                tmp_list.pop(idx + 1)
-                tmp_list.pop(idx - 1)
-                length -= 2
-            elif elem == '-':
-                temp = tmp_list[idx - 1] - tmp_list[idx + 1]
-                tmp_list[idx] = temp
-                tmp_list.pop(idx + 1)
-                tmp_list.pop(idx - 1)
-                length -= 2
-            else:
-                idx += 1
+        elem = tmp_list[idx]
+        if elem == '+':
+            temp = tmp_list[idx - 1] + tmp_list[idx + 1]
+            tmp_list[idx] = temp
+            tmp_list.pop(idx + 1)
+            tmp_list.pop(idx - 1)
+            length -= 2
+        elif elem == '-':
+            temp = tmp_list[idx - 1] - tmp_list[idx + 1]
+            tmp_list[idx] = temp
+            tmp_list.pop(idx + 1)
+            tmp_list.pop(idx - 1)
+            length -= 2
+        else:
+            idx += 1
     return tmp_list[0]
 
 
