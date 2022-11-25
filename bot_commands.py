@@ -1,9 +1,9 @@
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
-import model 
+import model
 
 
-# Определите несколько обработчиков команд. Обычно они принимают два аргумента update и 
+# Определите несколько обработчиков команд. Обычно они принимают два аргумента update и
 # context.
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Отправит сообщение, когда будет введена команда /start."""
@@ -17,7 +17,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=ForceReply(selective=True),
     )
 
-    
+
 async def calc(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Отправит сообщение, когда будет введена команда /calc"""
     await update.message.reply_text(f'{update.message.text[6:]} = {model.run(model.parsing(update.message.text[6:]))}')
@@ -49,7 +49,8 @@ def main() -> None:
     application.add_handler(CommandHandler("echo", echo))
 
     # повторит сообщение в Telegram
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
+    application.add_handler(MessageHandler(
+        filters.TEXT & ~filters.COMMAND, echo))
 
     # Запуск бота до тех пор, пока пользователь не нажмет Ctrl-C
     application.run_polling()
@@ -57,5 +58,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-    
